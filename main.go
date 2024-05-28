@@ -20,26 +20,28 @@ func main() {
 
 	// value := os.Getenv("path")  //obtiene variables del sistema operativo
 	err := godotenv.Load()
-	
+
 	if err != nil {
 		log.Fatal("Error: No hay variable")
 	}
-	
-	mi_var := os.Getenv("ROLANDO")  //obtiene variables del sistema operativo
-	
+
+	port := os.Getenv("PORT") //obtiene variables del sistema operativo
+
 	mux := http.NewServeMux()
-	
+
 	// define routes
 	mux.Handle("/user/", user.UserMux())
 	mux.Handle("/documento/", documento.DocumentoMux())
-	
+
+
 	server := &http.Server{
-		Addr:    ":4000",
+		Addr: ":" + port,
+		// Addr:    ":4000",
 		Handler: mux,
 	}
 	fmt.Println("Server run " + server.Addr)
-	fmt.Println("name"+ mi_var)
 	server.ListenAndServe()
+	log.Fatal(server)
 }
 
 // func AuthMux() http.Handler {
