@@ -34,8 +34,14 @@ func main() {
 	mux.Handle("/documento/", documento.DocumentoMux())
 
 
+	pepe := fmt.Sprintf("hola %s peru %.2f", "rolando", 2.4)
+	fmt.Println(pepe)
+	
+
+	result := fmt.Sprintf("%s%s", ":", port)
 	server := &http.Server{
-		Addr: ":" + port,
+		Addr: result,
+		// Addr: ":" + port,
 		// Addr:    ":4000",
 		Handler: mux,
 	}
