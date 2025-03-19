@@ -3,6 +3,7 @@ dist
 /dist
 .env
 env
+tmp
 .env.local
 # Keep environment variables out of version control
 
