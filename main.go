@@ -42,7 +42,8 @@ func main() {
 	fmt.Println(pepe)
 	
 
-	result := fmt.Sprintf("%s%s", ":", port)
+	result := fmt.Sprintf("0.0.0.0:" + port)
+	// result := fmt.Sprintf("%s%s", ":", port)
 	server := &http.Server{
 		Addr: result,
 		// Addr: ":" + port,
