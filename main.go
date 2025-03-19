@@ -27,6 +27,10 @@ func main() {
 
 	port := os.Getenv("PORT") //obtiene variables del sistema operativo
 
+	rol := os.Getenv("ROLANDO") 
+
+	fmt.Println("rolando", rol)
+
 	mux := http.NewServeMux()
 
 	// define routes
