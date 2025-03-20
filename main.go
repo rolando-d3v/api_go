@@ -25,28 +25,28 @@ func main() {
 		log.Fatal("Error: No hay variable")
 	}
 
+	//obtiene variables del sistema operativo
+	
+	rol := os.Getenv("ROLANDO")
+	
+	fmt.Println("rolando", rol)
+	
+	mux := http.NewServeMux()
+	
+	// define routes
+	mux.Handle("/user/", user.UserMux())
+	mux.Handle("/documento/", documento.DocumentoMux())
+	
+	pepe := fmt.Sprintf("hola %s peru %.2f", "rolando", 2.4)
+	fmt.Println(pepe)
+	
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "3000"
 	}
-	//obtiene variables del sistema operativo
-
-	rol := os.Getenv("ROLANDO")
-
-	fmt.Println("rolando", rol)
-
-	mux := http.NewServeMux()
-
-	// define routes
-	mux.Handle("/user/", user.UserMux())
-	mux.Handle("/documento/", documento.DocumentoMux())
-
-	pepe := fmt.Sprintf("hola %s peru %.2f", "rolando", 2.4)
-	fmt.Println(pepe)
-
 	// Configurar el servidor
 	server := &http.Server{
-		Addr:    "0.0.0.0:" + port,
+		Addr:    ":" + port,
 		Handler: mux,
 	}
 
