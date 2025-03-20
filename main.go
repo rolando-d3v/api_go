@@ -25,9 +25,13 @@ func main() {
 		log.Fatal("Error: No hay variable")
 	}
 
-	port := os.Getenv("PORT") //obtiene variables del sistema operativo
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "3000"
+	}
+	//obtiene variables del sistema operativo
 
-	rol := os.Getenv("ROLANDO") 
+	rol := os.Getenv("ROLANDO")
 
 	fmt.Println("rolando", rol)
 
@@ -37,22 +41,31 @@ func main() {
 	mux.Handle("/user/", user.UserMux())
 	mux.Handle("/documento/", documento.DocumentoMux())
 
-
 	pepe := fmt.Sprintf("hola %s peru %.2f", "rolando", 2.4)
 	fmt.Println(pepe)
-	
 
-	result := fmt.Sprintf("0.0.0.0:"+ port)
-	// result := fmt.Sprintf("%s%s", ":", port)
+	// Configurar el servidor
 	server := &http.Server{
-		Addr: result,
-		// Addr: ":" + port,
-		// Addr:    ":4000",
+		Addr:    ":" + port,
 		Handler: mux,
 	}
-	fmt.Println("Server run " + server.Addr)
-	server.ListenAndServe()
-	log.Fatal(server)
+
+	// Mostrar en consola el puerto en el que se ejecuta
+	fmt.Println("Server running on http://0.0.0.0:" + port)
+
+	// Iniciar el servidor y manejar errores
+	log.Fatal(server.ListenAndServe())
+
+	// result := fmt.Sprintf("%s%s", ":", port)
+	// server := &http.Server{
+	// 	Addr: result,
+	// 	// Addr: ":" + port,
+	// 	// Addr:    ":4000",
+	// 	Handler: mux,
+	// }
+	// fmt.Println("Server run " + server.Addr)
+	// server.ListenAndServe()
+	// log.Fatal(server)
 }
 
 // func AuthMux() http.Handler {
@@ -66,10 +79,6 @@ func main() {
 
 // 	return http.StripPrefix("/api/v1/auth", authMux)
 // }
-
-
-
-
 
 // package main
 
